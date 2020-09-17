@@ -391,7 +391,7 @@ If the current mode is `sql-mode' prepare buffer to operate as `ejc-sql-mode'."
 
 (defun ejc-read-connection-name ()
   "Read connection-name in minibuffer."
-  (ido-completing-read
+  (completing-read
    "DataBase connection name: "
    (let ((conn-list (mapcar 'car ejc-connections))
          (conn-statistics (ejc-load-conn-statistics)))
@@ -456,7 +456,7 @@ Apropriate artifacts list located in `ejc-jdbc-drivers'."
                      ("SQLite" . "sqlite")
                      ("PostgreSQL" . "postgresql")))
          (dbtype (cdr (assoc-string
-                       (ido-completing-read
+                       (completing-read
                         "Database type: "
                         (cl-sort (-map 'car db-types)
                                  'string-lessp :key 'downcase))
@@ -509,7 +509,7 @@ Apropriate artifacts list located in `ejc-jdbc-drivers'."
                  (:subname (if (member dbtype '("h2" "sqlite"))
                                (let ((fpath
                                       (file-truename
-                                       (ido-read-file-name "DB file: "))))
+                                       (read-file-name "DB file: "))))
                                  (if (equal "h2" dbtype)
                                      (concat "file://"
                                              (file-name-sans-extension
